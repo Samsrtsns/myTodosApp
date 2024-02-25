@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors;, prefer_const_constructors
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:newtodoapp/viewModel/login/auth_functions.dart';
 import 'package:newtodoapp/viewModel/loginScreenFunctions/login_screen_functions.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,16 +67,23 @@ class LoginScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 30, right: 30, bottom: 15),
-                child: LoginScreenFunctions.inputContainer("Email"),
+                child: LoginScreenFunctions.inputContainer(
+                    "Email", emailController),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 30, right: 30),
-                child: LoginScreenFunctions.inputContainer("Password",
+                child: LoginScreenFunctions.inputContainer(
+                    "Password", passwordController,
                     isTrue: true),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                child: LoginScreenFunctions.loginContainer(),
+              GestureDetector(
+                onTap: () {
+                  SignInService.signIn(context, emailController, passwordController);
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  child: LoginScreenFunctions.loginContainer(),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
@@ -88,9 +99,11 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   LoginScreenFunctions.loginAccount(
                     'assets/icons/apple.png',
+                    width: 50,
+                    height: 50,
                   ),
                   LoginScreenFunctions.loginAccount(
-                    'assets/icons/facebook.png'),
+                      'assets/icons/facebook.png'),
                   LoginScreenFunctions.loginAccount(
                     'assets/icons/google.png',
                   ),

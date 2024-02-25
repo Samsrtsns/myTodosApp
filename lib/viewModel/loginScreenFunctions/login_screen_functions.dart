@@ -32,7 +32,7 @@ static Widget customPositioned(
 
 
 //Input Container
-static Widget inputContainer(String text,{bool ? isTrue = false}) {
+static Widget inputContainer(String text,TextEditingController textEditingController,{bool ? isTrue = false}) {
   return FadeInDown(
     duration: const Duration(seconds: 1),
     child: Container(
@@ -52,6 +52,7 @@ static Widget inputContainer(String text,{bool ? isTrue = false}) {
       child: Padding(
         padding: const EdgeInsets.only(left: 12),
         child: TextField(
+          controller: textEditingController,
           obscureText: isTrue ?? false,
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -96,23 +97,12 @@ static Widget loginContainer() {
   );
 }
 
-static Widget loginAccount(String iconsPage) {
-  return Container(
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.3), // Gölge rengi ve şeffaflığı
-          spreadRadius: 3, // Gölge genişliği
-          blurRadius: 6, // Gölge bulanıklığı
-          offset: const Offset(0, 4), // Gölge konumu (x, y)
-        ),
-      ],
-    ),
+static Widget loginAccount(String iconsPage,{double  ? width = 45,double ? height = 45}) {
+  return SizedBox(
     child: Image.asset(
       iconsPage,
-      width: 45, 
-      height: 45, 
+      width: width, 
+      height: height, 
     ),
   );
 }
