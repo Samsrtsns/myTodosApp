@@ -66,7 +66,7 @@ static Widget inputContainer(String text,TextEditingController textEditingContro
 }
 
 //Login Container
-static Widget loginContainer() {
+static Widget loginContainer(String text) {
   return FadeInUp(
     duration: const Duration(seconds: 1),
     child: Container(
@@ -83,10 +83,10 @@ static Widget loginContainer() {
         borderRadius: BorderRadius.circular(12),
         color: const Color.fromARGB(255, 98, 23, 228),
       ),
-      child: const Center(
+      child: Center(
         child: Text(
-          "Login",
-          style: TextStyle(
+          text,
+          style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -96,6 +96,8 @@ static Widget loginContainer() {
     ),
   );
 }
+
+
 
 static Widget loginAccount(String iconsPage,{double  ? width = 45,double ? height = 45}) {
   return SizedBox(

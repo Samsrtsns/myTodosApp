@@ -1,18 +1,26 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:newtodoapp/provider/navbar_index.dart';
+import 'package:newtodoapp/provider/sign_in_change.dart';
+import 'package:provider/provider.dart';
 import 'package:newtodoapp/view/login/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
-//Firabase connection 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => NavbarChangeIndex()),
+        ChangeNotifierProvider(create: (context) => ChangeToSignUp()),
+        // İhtiyacınıza göre diğer sağlayıcıları ekleyin
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,5 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

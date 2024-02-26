@@ -74,3 +74,20 @@ class SignInService {
     }
   }
 }
+
+class SignUpService {
+  static Future<void> signUp(String email, String password) async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      User? user = userCredential.user;
+      print("User created: ${user?.uid}");
+    } catch (e) {
+      // Hata durumunda buraya gelecek
+      print("Error creating user: $e");
+    }
+  }
+}
