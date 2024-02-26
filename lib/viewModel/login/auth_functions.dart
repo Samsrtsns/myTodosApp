@@ -84,9 +84,11 @@ class SignUpService {
         password: password,
       );
       User? user = userCredential.user;
+      // ignore: avoid_print
       print("User created: ${user?.uid}");
     } catch (e) {
       // Hata durumunda buraya gelecek
+      // ignore: avoid_print
       print("Error creating user: $e");
     }
   }
